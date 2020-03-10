@@ -8,11 +8,12 @@
 % Website: http://www.liujialin.tech/
 % Feb 2019; Last revision: 9-Mar-2020
 
-function [apprx, appry]=CEP(funcName,n,lb,ub,nbGens,initialPop)
+function [apprx, appry, recordedFit]=CEP(funcName,n,lb,ub,nbGens,initialPop)
 warning on MATLAB:divideByZero
-if nargin < 2
+if nargin < 5
   error('input_example :  not enough input')
 end
+epsilon=10^(-3);
 % Pass the variables
 tau=1/sqrt(2*sqrt(n));
 taup=1/sqrt(2*n);
@@ -27,45 +28,69 @@ else
     population=boundData(population,lb,ub);
 end
 eta=initialEta*ones(mu,n); % standard deviations for Gaussian mutations
+eta=boundData(eta,epsilon);
 % Evaluate the population
 k=1; % generation number
 numEvals=0; % evaluation number
+recordedFit=zeros(1,nbGens);
 fitnessParent=zeros(mu,1);
 fitnessOffspring=zeros(mu,1);
 for i=1:mu
     fitnessParent(i)=evaluate(funcName,population(i,:));
     numEvals=numEvals+1;
 end
+[bestSoFarFit, bestSoFar]=max(fitnessParent);
+bestSoFarX=population(bestSoFar,:);
+recordedFit(k)=max(fitnessParent);
 while (k<nbGens)
     % Reproduction
     offspring=population+eta.*cauchy(mu,n); % offspring
     offspring=boundData(offspring,lb,ub);
-    etaOffspring=eta.*exp(taup*randn(mu,n)+tau*randn(mu,n)); % update eta
+    commonRnd=randn(mu,1).*ones(1,n);
+    etaOffspring=eta.*exp(taup*commonRnd+tau*randn(mu,n)); % update eta
+    etaOffspring=boundData(etaOffspring,epsilon);
     % Evaluate offspring
     for i=1:mu
         fitnessOffspring(i)=evaluate(funcName,offspring(i,:));
         numEvals=numEvals+1;
     end
     % Pairwise comparison (round robin tournament selection)
-    numWins=zeros(1,2*n); % parents, offspring
+    numWins=zeros(1,2*mu); % parents, offspring
     fitnessVector=[fitnessParent; fitnessOffspring];
     individualList=[population; offspring];
     etaList=[eta; etaOffspring];
     for i=1:2*mu
-        selected=randi(n,1,q);
-        wins=find(fitnessVector(selected)>fitnessVector(i));
+        tmp=randperm(2*mu);
+        opponents=tmp(1:q);
+        wins=find(fitnessVector(opponents)<fitnessVector(i));
         numWins(i)=length(wins);
     end
-    [~,indices]=sort(numWins,'descend');
+    [sortedNumWins,sortedNumWinsIndices]=sort(numWins,'descend');
+    winners=sortedNumWinsIndices(1:mu);
+    threshold=sortedNumWins(mu);
+    if threshold~=numWins(winners(end))
+        error("Bug here.")
+    end
+    ties=find(numWins==threshold);
+    numTies=length(ties);
+    % Break ties
+    if numTies>1
+        startReplaced=find(winners==ties(1));
+        tmp=randperm(numTies);
+        selectedTies=tmp(1:mu-startReplaced+1);
+        winners(startReplaced:end)=ties(selectedTies);
+    end
     % Update
-    winners=indices(1:mu);
     population=individualList(winners,:);
     fitnessParent=fitnessVector(winners);
     eta=etaList(winners,:);
+    [bestSoFarFit, bestSoFar]=max(fitnessVector);
+    bestSoFarX=individualList(bestSoFar,:);
     k=k+1;
+    recordedFit(k)=max(fitnessParent);
 end
-apprx=population(1,:);
-appry=fitnessParent(1);
+[appry, idx]=max(fitnessParent);
+apprx=population(idx,:);
 end
 
 function y=evaluate(funcName,x)
@@ -73,6 +98,6 @@ eval(sprintf('objective=@%s;',funcName)); % Do not delete this line
 %% TODO: below to implement your own fitness function
 %------------- BEGIN CODE --------------
 objValue=objective(x); 
-y=objValue;
+y=-objValue;
 %------------- END OF CODE --------------
 end

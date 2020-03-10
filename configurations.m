@@ -10,7 +10,7 @@ addpath('./benchmark/');
 addpath('./utils/');
 addpath('./optimisers/');
 % load benchmark
-benchmark;
+benchmarkInfo;
 % Number of repetitions
 configuration.numRuns=50;
 configuration.funcIndices=1:length(benchmark);
