@@ -10,6 +10,7 @@
 %% different optimisers.
 clc
 clear all
+close all
 % load configuration and benchmark
 configurations
 
@@ -23,7 +24,7 @@ latexTable=latexTable+newline...
     +"\multirow{2}{*}{Function} & \multirow{2}{*}{\#Gens}" ...
     +"& \multicolumn{2}{c}{FEP} & \multicolumn{2}{c}{CEP} & FEP-CEP \\";
 latexTable=latexTable+newline+" & & " ...
-    +"Mean Best & Std Dev & Mean Best & Std Dev & $t$-test \\";
+    +"Mean Best & Std Dev & Mean Best & Std Dev & Wilcoxon \\";
 latexTable=latexTable+newline+"\hline"+newline;
 
 % Save h values for t-test
@@ -84,12 +85,12 @@ for funcIdx=configuration.funcIndices
     [p,h]=ranksum(resCEP,resFEP);
     if(h==1)
         if(mean(resFEP)<mean(resCEP))
-            decision='w';
+            decision='win';
         else
-            decision='l';
+            decision='loss';
         end
     else
-        decision='d';
+        decision='draw';
     end
     latexTable=sprintf("%s & %s \\\\",latexTable,decision);
     latexTable=latexTable+newline;
@@ -101,6 +102,7 @@ for funcIdx=configuration.funcIndices
     plot(mean(toPlot2),'r', 'LineWidth', 2)
     legend('Best of FEP', 'Best of CEP');
     saveas(gcf, sprintf('figures/f%d',funcIdx), 'pdf') %Save figure
+    close(funcIdx)
     for offset=[100 200 500]
         figure(funcIdx+offset)
         hold on
@@ -108,7 +110,18 @@ for funcIdx=configuration.funcIndices
         plot([offset:numGens],mean(toPlot2(:,offset:end)),'r', 'LineWidth', 2)
         legend('Best of FEP', 'Best of CEP');
         saveas(gcf, sprintf('figures/f%d-offset%d',funcIdx,offset), 'pdf') %Save figure
+        close(funcIdx+offset)
     end
+    disp("%%%%%%%%%% BEGIN PRINT LOG %%%%%%%%%%%%");
+    disp(log)
+    disp("%%%%%%%%%% END PRINT LOG %%%%%%%%%%%%");
+    disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    disp("%%%%%%%%%% BEGIN LATEX TABLE %%%%%%%%%%%%");
+    disp(latexTable)
+    disp("%%%%%%%%%% END LATEX TABLE %%%%%%%%%%%%");
+    disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 end
 
 % Print hValues
