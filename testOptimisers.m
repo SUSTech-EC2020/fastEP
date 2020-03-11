@@ -48,13 +48,18 @@ for funcIdx=configuration.funcIndices
     % FEP
     log=log+sprintf('[FEP Optimisation of function %s]\n',objFunc);
     resFEP=zeros(configuration.numRuns,1);
-    toPlot1=zeros(configuration.numRuns,numGens);
+    plotFEPBest=zeros(configuration.numRuns,numGens);
+    plotFEPAvg=zeros(configuration.numRuns,numGens);
     for r=1:configuration.numRuns
-        [apprx, appry, recordedFit]=FEP(objFunc,n,lb,ub,numGens,InitialPop);
-        log=log+sprintf('RUN %d: Approximate optimal value=%.16f\n', r, -appry);
-        log=log+sprintf('RUN %d: Approximate optimum=%s\n', r, mat2str(apprx));
-        resFEP(r)=-appry;
-        toPlot1(r,:)=-recordedFit;
+        [bestx, recordedAvgY, recordedBestY]=FEP(objFunc,n,lb,ub,numGens,InitialPop);
+        recordedBestY=-recordedBestY;
+        recordedAvgY=-recordedAvgY;
+        besty=recordedBestY(end);
+        log=log+sprintf('RUN %d: Approximate optimal value=%.16f\n', r, besty);
+        log=log+sprintf('RUN %d: Approximate optimum=%s\n', r, mat2str(bestx));
+        resFEP(r)=besty;
+        plotFEPBest(r,:)=recordedBestY;
+        plotFEPAvg(r,:)=recordedAvgY;
     end
     log=log+sprintf('FINAL: Averaged approximate optimal value=%.16f (%.16f)\n\n', ...
         mean(resFEP), std(resFEP));
@@ -63,13 +68,18 @@ for funcIdx=configuration.funcIndices
     % CEP
     log=log+sprintf('[CEP Optimisation of function %s]\n',objFunc);
     resCEP=zeros(configuration.numRuns,1);
-    toPlot2=zeros(configuration.numRuns,numGens);
+    plotCEPBest=zeros(configuration.numRuns,numGens);
+    plotCEPAvg=zeros(configuration.numRuns,numGens);
     for r=1:configuration.numRuns
-        [apprx, appry, recordedFit]=CEP(objFunc,n,lb,ub,numGens,InitialPop);
-        log=log+sprintf('RUN %d: Approximate optimal value=%.16f\n', r, -appry);
-        log=log+sprintf('RUN %d: Approximate optimum=%s\n', r, mat2str(apprx));
-        resCEP(r)=-appry;
-        toPlot2(r,:)=-recordedFit;
+        [bestx, recordedAvgY, recordedBestY]=CEP(objFunc,n,lb,ub,numGens,InitialPop);
+        recordedBestY=-recordedBestY;
+        recordedAvgY=-recordedAvgY;
+        besty=recordedBestY(end);
+        log=log+sprintf('RUN %d: Approximate optimal value=%.16f\n', r, besty);
+        log=log+sprintf('RUN %d: Approximate optimum=%s\n', r, mat2str(bestx));
+        resCEP(r)=besty;
+        plotCEPBest(r,:)=recordedBestY;
+        plotCEPAvg(r,:)=recordedAvgY;
     end
     log=log+sprintf('FINAL: Averaged approximate optimal value=%.16f (%.16f)\n\n', ...
         mean(resCEP), std(resCEP));
@@ -98,20 +108,38 @@ for funcIdx=configuration.funcIndices
     % Plot
     figure(funcIdx)
     hold on
-    plot(mean(toPlot1),'b', 'LineWidth', 2)
-    plot(mean(toPlot2),'r', 'LineWidth', 2)
-    legend('Best of FEP', 'Best of CEP');
+    plot(mean(plotFEPBest),'b', 'LineWidth', 2)
+    plot(mean(plotCEPBest),'r', 'LineWidth', 2)
+    legend('Best of FEP', 'Best of CEP','FontSize',14);
     saveas(gcf, sprintf('figures/f%d',funcIdx), 'pdf') %Save figure
     close(funcIdx)
     for offset=[100 200 500]
         figure(funcIdx+offset)
         hold on
-        plot([offset:numGens],mean(toPlot1(:,offset:end)),'b', 'LineWidth', 2)
-        plot([offset:numGens],mean(toPlot2(:,offset:end)),'r', 'LineWidth', 2)
-        legend('Best of FEP', 'Best of CEP');
+        plot([offset:numGens],mean(plotFEPBest(:,offset:end)),'b', 'LineWidth', 2)
+        plot([offset:numGens],mean(plotCEPBest(:,offset:end)),'r', 'LineWidth', 2)
+        legend('Best of FEP', 'Best of CEP','FontSize',14);
         saveas(gcf, sprintf('figures/f%d-offset%d',funcIdx,offset), 'pdf') %Save figure
         close(funcIdx+offset)
     end
+    
+    figure(funcIdx)
+    hold on
+    plot(mean(plotFEPAvg),'b', 'LineWidth', 2)
+    plot(mean(plotCEPAvg),'r', 'LineWidth', 2)
+    legend('Average of FEP', 'Average of CEP','FontSize',14);
+    saveas(gcf, sprintf('figures/f%d-avg',funcIdx), 'pdf') %Save figure
+    close(funcIdx)
+    for offset=[100 200 500]
+        figure(funcIdx+offset)
+        hold on
+        plot([offset:numGens],mean(plotFEPAvg(:,offset:end)),'b', 'LineWidth', 2)
+        plot([offset:numGens],mean(plotCEPAvg(:,offset:end)),'r', 'LineWidth', 2)
+        legend('Average of FEP', 'Average of CEP','FontSize',14);
+        saveas(gcf, sprintf('figures/f%d-offset%d-avg',funcIdx,offset), 'pdf') %Save figure
+        close(funcIdx+offset)
+    end
+    
     disp("%%%%%%%%%% BEGIN PRINT LOG %%%%%%%%%%%%");
     disp(log)
     disp("%%%%%%%%%% END PRINT LOG %%%%%%%%%%%%");

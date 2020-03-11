@@ -72,3 +72,15 @@ benchmark(11).description={'Griewank'};
 benchmark(11).dimension=30;
 benchmark(11).bounds=[ -600, 600];
 benchmark(11).optimum=zeros(1,benchmark(11).dimension);
+
+benchmark(12).funcName={'goldsteinPrice'}; % This is f17 in the paper
+benchmark(12).description={'Goldstein-Price Function'};
+benchmark(12).dimension=2;
+benchmark(12).bounds=[ -5, 10; 0, 15];
+benchmark(12).optimum=zeros(1,benchmark(11).dimension);
+
+benchmark(13).funcName={'shekel'}; % This is f21, f22, f23 in the paper
+benchmark(13).description={'Shekel''s Family'};
+benchmark(13).dimension=4;
+benchmark(13).bounds=[ 0, 10];
+benchmark(13).optimum=zeros(1,benchmark(11).dimension);

@@ -8,7 +8,7 @@
 % Website: http://www.liujialin.tech/
 % Feb 2019; Last revision: 9-Mar-2020
 
-function [apprx, appry, recordedFit]=CEP(funcName,n,lb,ub,nbGens,initialPop)
+function [bestx, recordedAvgY, recordedBestY]=CEP(funcName,n,lb,ub,nbGens,initialPop)
 warning on MATLAB:divideByZero
 if nargin < 5
   error('input_example :  not enough input')
@@ -32,7 +32,7 @@ eta=boundData(eta,epsilon);
 % Evaluate the population
 k=1; % generation number
 numEvals=0; % evaluation number
-recordedFit=zeros(1,nbGens);
+recordedBestY=zeros(1,nbGens);
 fitnessParent=zeros(mu,1);
 fitnessOffspring=zeros(mu,1);
 for i=1:mu
@@ -41,7 +41,8 @@ for i=1:mu
 end
 [bestSoFarFit, bestSoFar]=max(fitnessParent);
 bestSoFarX=population(bestSoFar,:);
-recordedFit(k)=max(fitnessParent);
+recordedBestY(k)=max(fitnessParent);
+recordedAvgY(k)=mean(fitnessParent);
 while (k<nbGens)
     % Reproduction
     offspring=population+eta.*randn(mu,n); % offspring
@@ -87,10 +88,11 @@ while (k<nbGens)
     [bestSoFarFit, bestSoFar]=max(fitnessVector);
     bestSoFarX=individualList(bestSoFar,:);
     k=k+1;
-    recordedFit(k)=max(fitnessParent);
+    recordedBestY(k)=max(fitnessParent);
+    recordedAvgY(k)=mean(fitnessParent);
 end
-[appry, idx]=max(fitnessParent);
-apprx=population(idx,:);
+[~, idx]=max(fitnessParent);
+bestx=population(idx,:);
 end
 
 function y=evaluate(funcName,x)
