@@ -85,7 +85,8 @@ initilize all eta = 0.1
 
 ![](./figures/wuyu.png) 
 
-  TODO
+Fixed some bugs :
+![](./figures/wuyu_2.png)
   
 8. Use adaptive mutation operator (潘超)
   
