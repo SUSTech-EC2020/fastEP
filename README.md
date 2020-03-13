@@ -76,7 +76,7 @@ TODO
   TODO
   
 7. Use mean mutation operator (吴钰)
- 
+![](./figures/wuyu.png) 
 
   TODO
   
