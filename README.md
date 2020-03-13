@@ -51,14 +51,38 @@ In this lab, we will exxplore how **search operators** and **implementation deta
 
 ### Results and Discussion (to be filled by students)
 
-* Use Levy Distribution to sample random perturbation to generate offspring (蒋如意)
+1. Use Levy Distribution to sample random perturbation to generate offspring (蒋如意)
 
-* Handling bounds of search space:
-  * When a point is outside of bounds, re-sample it till being inside (谭浩)
-  * Using a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
-* Use mutation step-size to adjust lower bounds for $\eta$ (欧阳奕成)
-* Mutate $\eta$ first then mutate $\x$ (赵志翔)
-* Mix search biases by self-adaptation
-  * Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
-  * Use mean mutation operator (吴钰)
-  * Use adaptive mutation operator (潘超)
+TODO
+
+2. Handling bounds of search space:
+
+  2.1. When a point is outside of bounds, re-sample it till being inside (谭浩)
+  
+  TODO
+  
+  2.2. Using a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
+  
+  TODO
+  
+3. Use mutation step-size to adjust lower bounds for $\eta$ (欧阳奕成)
+
+TODO
+
+4. Mutate $\eta$ first then mutate $\x$ (赵志翔)
+
+TODO
+
+5. Mix search biases by self-adaptation
+
+  5.1 Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
+  
+  TODO
+  
+  5.2 Use mean mutation operator (吴钰)
+  
+  TODO
+  
+  5.3 Use adaptive mutation operator (潘超)
+  
+  TODO
