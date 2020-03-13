@@ -57,11 +57,11 @@ TODO
 
 2. Handling bounds of search space:
 
-  2.1. When a point is outside of bounds, re-sample it till being inside (谭浩)
+  1. When a point is outside of bounds, re-sample it till being inside (谭浩)
   
   TODO
   
-  2.2. Using a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
+  2. Using a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
   
   TODO
   
@@ -75,14 +75,14 @@ TODO
 
 5. Mix search biases by self-adaptation
 
-  5.1 Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
+  1. Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
   
   TODO
   
-  5.2 Use mean mutation operator (吴钰)
+  2. Use mean mutation operator (吴钰)
   
   TODO
   
-  5.3 Use adaptive mutation operator (潘超)
+  3. Use adaptive mutation operator (潘超)
   
   TODO
