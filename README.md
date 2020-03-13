@@ -55,7 +55,13 @@ TODO
 
 2. When a point is outside of bounds, re-sample it till being inside (谭浩)
   
-TODO
+running times = 50
+
+population size = 100
+
+max resample = 5
+
+![](./figures/tanhao.png)
 
 3. When a point is outside of bounds, use a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
   
