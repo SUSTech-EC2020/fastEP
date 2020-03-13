@@ -28,10 +28,7 @@ This project is used for teaching the course **CS408/CSE5012: Evolutionary Compu
 - A fixed lower bound is set for step-size.
 - The individual is mutated first then mutate the step-size.
 
-The programs will also output formatted Latex table for results and plots of evolutionary curves. Examples as follows.
-
-![Optimising f1: Best of population, f1](/figures/f1-best-crop.pdf)
-![Optimising f1: Average of population](/figures/f1-avg-crop.pdf)
+The programs will also output formatted Latex table for results and plots of evolutionary curves.
 
 
 ## Lab 4: Explore how search operators and implementation details affect an EA’s performance.
