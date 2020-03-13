@@ -110,34 +110,42 @@ for funcIdx=configuration.funcIndices
     hold on
     plot(mean(plotFEPBest),'b', 'LineWidth', 2)
     plot(mean(plotCEPBest),'r', 'LineWidth', 2)
-    legend('Best of FEP', 'Best of CEP','FontSize',14);
-    saveas(gcf, sprintf('figures/f%d',funcIdx), 'pdf') %Save figure
+    legend('Best of FEP', 'Best of CEP','FontSize',20);
+    set(gca,'FontSize',20)
+    saveas(gcf, sprintf('figures/f%d-best',funcIdx), 'pdf') %Save figure
     close(funcIdx)
     for offset=[100 200 500]
-        figure(funcIdx+offset)
-        hold on
-        plot([offset:numGens],mean(plotFEPBest(:,offset:end)),'b', 'LineWidth', 2)
-        plot([offset:numGens],mean(plotCEPBest(:,offset:end)),'r', 'LineWidth', 2)
-        legend('Best of FEP', 'Best of CEP','FontSize',14);
-        saveas(gcf, sprintf('figures/f%d-offset%d',funcIdx,offset), 'pdf') %Save figure
-        close(funcIdx+offset)
+        if (numGens>offset)
+            figure(funcIdx+offset)
+            hold on
+            plot([offset:numGens],mean(plotFEPBest(:,offset:end)),'b', 'LineWidth', 2)
+            plot([offset:numGens],mean(plotCEPBest(:,offset:end)),'r', 'LineWidth', 2)
+            legend('Best of FEP', 'Best of CEP','FontSize',20);
+            set(gca,'FontSize',20)
+            saveas(gcf, sprintf('figures/f%d-best-offset%d',funcIdx,offset), 'pdf') %Save figure
+            close(funcIdx+offset)
+        end
     end
     
     figure(funcIdx)
     hold on
     plot(mean(plotFEPAvg),'b', 'LineWidth', 2)
     plot(mean(plotCEPAvg),'r', 'LineWidth', 2)
-    legend('Average of FEP', 'Average of CEP','FontSize',14);
+    legend('Average of FEP', 'Average of CEP','FontSize',20);
+    set(gca,'FontSize',20)
     saveas(gcf, sprintf('figures/f%d-avg',funcIdx), 'pdf') %Save figure
     close(funcIdx)
     for offset=[100 200 500]
-        figure(funcIdx+offset)
-        hold on
-        plot([offset:numGens],mean(plotFEPAvg(:,offset:end)),'b', 'LineWidth', 2)
-        plot([offset:numGens],mean(plotCEPAvg(:,offset:end)),'r', 'LineWidth', 2)
-        legend('Average of FEP', 'Average of CEP','FontSize',14);
-        saveas(gcf, sprintf('figures/f%d-offset%d-avg',funcIdx,offset), 'pdf') %Save figure
-        close(funcIdx+offset)
+        if (numGens>offset)
+            figure(funcIdx+offset)
+            hold on
+            plot([offset:numGens],mean(plotFEPAvg(:,offset:end)),'b', 'LineWidth', 2)
+            plot([offset:numGens],mean(plotCEPAvg(:,offset:end)),'r', 'LineWidth', 2)
+            legend('Average of FEP', 'Average of CEP','FontSize',20);
+            set(gca,'FontSize',20)
+            saveas(gcf, sprintf('figures/f%d-avg-offset%d',funcIdx,offset), 'pdf') %Save figure
+            close(funcIdx+offset)
+        end
     end
     
     disp("%%%%%%%%%% BEGIN PRINT LOG %%%%%%%%%%%%");
@@ -150,6 +158,7 @@ for funcIdx=configuration.funcIndices
     disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    save(sprintf('res/f%d.mat',funcIdx));
 end
 
 % Print hValues

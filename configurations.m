@@ -13,6 +13,6 @@ addpath('./optimisers/');
 benchmarkInfo;
 % Number of repetitions
 configuration.numRuns=50;
-configuration.funcIndices=13:13;%1:length(benchmark);
+configuration.funcIndices=[1:11,13];%length(benchmark);
 configuration.generations=[1500, 2000, 5000, 5000, 20000, 1500, 3000, ...
     9000, 5000, 1500, 2000, 100, 100];
