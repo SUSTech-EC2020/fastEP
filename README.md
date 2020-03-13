@@ -77,12 +77,10 @@ TODO
   
 7. Use mean mutation operator (吴钰)
  
- **Attention: You will use more evaluations if fixing the same number of generations!**
 
   TODO
   
 8. Use adaptive mutation operator (潘超)
   
-  **Attention: You will use more evaluations if fixing the same number of generations!**
 
   TODO
