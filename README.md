@@ -47,7 +47,7 @@ The programs will also output formatted Latex table for results and plots of evo
 In this lab, we will exxplore how **search operators** and **implementation details** affect an EA's performance.
 
 ### Results and Discussion (to be filled by students)
-Attention: Repeat fewer times or use a smaller number of generations as the experiments will run long ...
+**Attention: Repeat fewer times or use a smaller number of generations as the experiments will run long ...**
 
 1. Use Levy Distribution to sample random perturbation to generate offspring (蒋如意)
 
@@ -71,18 +71,18 @@ TODO
 
 6. Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
  
- ** Attention: You will use more evaluations if fixing the same number of generations! **
+ **Attention: You will use more evaluations if fixing the same number of generations!**
 
   TODO
   
 7. Use mean mutation operator (吴钰)
  
- ** Attention: You will use more evaluations if fixing the same number of generations! **
+ **Attention: You will use more evaluations if fixing the same number of generations!**
 
   TODO
   
 8. Use adaptive mutation operator (潘超)
   
-  ** Attention: You will use more evaluations if fixing the same number of generations! **
+  **Attention: You will use more evaluations if fixing the same number of generations!**
 
   TODO
