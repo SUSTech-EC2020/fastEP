@@ -55,34 +55,30 @@ In this lab, we will exxplore how **search operators** and **implementation deta
 
 TODO
 
-2. Handling bounds of search space:
+2. When a point is outside of bounds, re-sample it till being inside (谭浩)
+  
+  TODO
 
-  1. When a point is outside of bounds, re-sample it till being inside (谭浩)
+3. When a point is outside of bounds, use a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
   
   TODO
   
-  2. Using a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
-  
-  TODO
-  
-3. Use mutation step-size to adjust lower bounds for $\eta$ (欧阳奕成)
+4. Use mutation step-size to adjust lower bounds for $\eta$ (欧阳奕成)
 
 TODO
 
-4. Mutate $\eta$ first then mutate $\x$ (赵志翔)
+5. Mutate $\eta$ first then mutate $\x$ (赵志翔)
 
 TODO
 
-5. Mix search biases by self-adaptation
-
-  1. Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
+6. Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
   
   TODO
   
-  2. Use mean mutation operator (吴钰)
+7. Use mean mutation operator (吴钰)
   
   TODO
   
-  3. Use adaptive mutation operator (潘超)
+8. Use adaptive mutation operator (潘超)
   
   TODO
