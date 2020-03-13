@@ -76,6 +76,13 @@ TODO
   TODO
   
 7. Use mean mutation operator (吴钰)
+
+experiment times = 10
+
+population size = 50
+
+initilize all eta = 0.1
+
 ![](./figures/wuyu.png) 
 
   TODO
