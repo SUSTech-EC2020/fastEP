@@ -54,7 +54,7 @@ In this lab, we will exxplore how **search operators** and **implementation deta
 TODO
 
 2. When a point is outside of bounds, re-sample it till being inside (谭浩)
-  
+
 running times = 50
 
 population size = 100
@@ -64,9 +64,9 @@ max resample = 5
 ![](./figures/tanhao.png)
 
 3. When a point is outside of bounds, use a projection to map $(-\infty,\infty)$ to $[lb,ub]$ (裴季源)
-  
+
 TODO
-  
+
 4. Use mutation step-size to adjust lower bounds for $\eta$ (欧阳奕成)
 
 TODO
@@ -76,11 +76,13 @@ TODO
 TODO
 
 6. Generate 2 offspring using Cauchy and Gaussian, take the fitter one (IFEP) (张清泉)
- 
+
  **Attention: You will use more evaluations if fixing the same number of generations!**
 
-  TODO
-  
+running times = 10
+
+  ![](figures\IFEP_zqq.png)
+
 7. Use mean mutation operator (吴钰)
 
 experiment times = 10
@@ -93,11 +95,11 @@ initilize all eta = 0.1
 
 Fixed some bugs :
 ![](./figures/wuyu_2.png)
-  
-8. Use adaptive mutation operator (潘超)
-  
 
-  | Function | Gens  |       Mean Best       |           Std           | Repeat Times |
+8. Use adaptive mutation operator (潘超)
+
+
+| Function | Gens  |       Mean Best       |           Std           | Repeat Times |
 | :------: | :---: | :-------------------: | :---------------------: | :----------: |
 |    f1​    | 1500  | 0.0001349350644718995 | 0.000048169088531777096 |      3       |
 |    f2    | 2000  | 0.020016292787322087  |  0.004716485331152362   |      3       |
