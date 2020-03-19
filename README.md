@@ -81,7 +81,7 @@ TODO
 
 running times = 10
 
-  ![](figures\IFEP_zqq.png)
+  ![](figures\IFEPzqq.png)
 
 7. Use mean mutation operator (吴钰)
 
